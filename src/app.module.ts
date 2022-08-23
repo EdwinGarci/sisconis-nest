@@ -1,14 +1,17 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DatabaseModule } from './config/database/database.module';
-import { CampamentoController } from './modules/campamentos/controller/campamento.controller';
-import { CampamentoService } from './modules/campamentos/service/campamento.service';
-import { OficinaController } from './modules/oficinas/controller/oficina.controller';
-import { OficinaService } from './modules/oficinas/service/oficina.service';
+import { CampamentosModule } from './modules/campamentos/campamentos.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot({}), DatabaseModule],
-  controllers: [CampamentoController, OficinaController],
-  providers: [CampamentoService, OficinaService],
+  imports: [ConfigModule.forRoot({ isGlobal: true }),
+    DatabaseModule,
+    CampamentosModule,
+  ],
 })
-export class AppModule {}
+export class AppModule {
+  static port: number;
+  constructor(private readonly configService: ConfigService) {
+    AppModule.port = +this.configService.get('PORT');
+  }
+}
