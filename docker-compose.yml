@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres:13-alpine
+    container_name: database_sisconis
+    restart: always
+    environment:
+      POSTGRES_DB: bd-sisconis
+      POSTGRES_USER: admin-sisconis
+      POSTGRES_PASSWORD: Pechp-Sisconis-2OZZ
+    volumes:
+      - /var/lib/postgresql/data
+    ports:
+      -5432:5432
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgAdmin-sisconis
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@nestjs.com
+      PGADMIN_DEFAULT_PASSWORD: root
+      PGADMIN_DEFAULT_PORT: 80
+    ports:
+      -8300:80
+    volumes:
+      - /var/lib/pgadmin
+    depends_on:
+      - db
