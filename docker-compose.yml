@@ -6,13 +6,13 @@ services:
     container_name: database_sisconis
     restart: always
     environment:
-      POSTGRES_DB: bd-sisconis
-      POSTGRES_USER: admin-sisconis
-      POSTGRES_PASSWORD: Pechp-Sisconis-2OZZ
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - /var/lib/postgresql/data
     ports:
-      -5432:5432
+      - 5432:5432
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgAdmin-sisconis
@@ -22,7 +22,7 @@ services:
       PGADMIN_DEFAULT_PASSWORD: root
       PGADMIN_DEFAULT_PORT: 80
     ports:
-      -8300:80
+      - 8300:80
     volumes:
       - /var/lib/pgadmin
     depends_on:
