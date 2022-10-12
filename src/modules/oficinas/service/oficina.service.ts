@@ -22,9 +22,20 @@ export class OficinaService implements OficinaInterface {
         //Mensaje para cuando no se encuentren registros
         if (oficina && oficina.length == 0) throw new HttpException({
             status: HttpStatus.ACCEPTED,
-            error: 'No hay vacunaciones para mostrar.',
+            error: 'No hay oficinas para mostrar.',
         }, HttpStatus.ACCEPTED)
 
+        return oficina;
+    }
+
+    async getOficina(id: number): Promise<Oficina[]> {
+        const oficina = await this.oficinaRepository.find({where: {id: id},});
+        if(!oficina) throw new NotFoundException("Algo salió mal");
+        if(oficina && oficina.length == 0) throw new HttpException({
+            status: HttpStatus.ACCEPTED,
+            error: 'No hay oficina para mostrar.',
+        }, HttpStatus.ACCEPTED)
+        
         return oficina;
     }
 
@@ -41,7 +52,7 @@ export class OficinaService implements OficinaInterface {
         });
 
         if (!oficina) {
-            throw new NotFoundException('Registro de vacunación no encontrado.')
+            throw new NotFoundException('Registro de oficina no encontrado.')
         }
 
         this.oficinaRepository.save(oficina);

@@ -23,7 +23,7 @@ export class CampamentoService implements CampamentoInterface {
         //Mensaje para cuando no se encuentren registros
         if (campamentos && campamentos.length == 0) throw new HttpException({
             status: HttpStatus.ACCEPTED,
-            error: 'No hay vacunaciones para mostrar.',
+            error: 'No hay campamentos para mostrar.',
         }, HttpStatus.ACCEPTED)
 
         return campamentos;
@@ -34,7 +34,7 @@ export class CampamentoService implements CampamentoInterface {
         if(!campamento) throw new NotFoundException("Algo salió mal");
         if (campamento && campamento.length == 0) throw new HttpException({
             status: HttpStatus.ACCEPTED,
-            error: 'No hay campamentos para mostrar.',
+            error: 'No hay campamento para mostrar.',
         }, HttpStatus.ACCEPTED)
         
         return campamento;
@@ -51,7 +51,7 @@ export class CampamentoService implements CampamentoInterface {
         });
 
         if (!campamento) {
-            throw new NotFoundException('Recurso no encontrado')
+            throw new NotFoundException('Campamento no encontrado')
         }
 
         this.campamentoRepository.save(campamento);

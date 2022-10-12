@@ -14,19 +14,24 @@ export class OficinaController {
         return this.oficinaService.getOficinas();
     }
 
+    @Get('id')
+    async getOficina(@Param('id') id: number ): Promise<Oficina[]>{
+        return this.oficinaService.getOficina(id);
+    }
+
     @Post()
     //@HttpCode(HttpStatus.NO_CONTENT)  //Cambiar codigo de estado
-    createVaccination(@Body() createOficina: CreateOficinaDto): Promise<Oficina> {
+    createOficina(@Body() createOficina: CreateOficinaDto): Promise<Oficina> {
         return this.oficinaService.createOficina(createOficina);
     }
 
     @Patch(':id')
-    updateVaccination(@Param('id') id: number, @Body() oficina: UpdateOficinaDto): Promise<Oficina> {
+    updateOficina(@Param('id') id: number, @Body() oficina: UpdateOficinaDto): Promise<Oficina> {
         return this.oficinaService.updateOficina(id, oficina);
     }
 
     @Delete(':id')
-    deleteVaccination(@Param('id') id: number): Promise<Object> {
+    deleteOficina(@Param('id') id: number): Promise<Object> {
         return this.oficinaService.deleteOficina(id);
     }
 }

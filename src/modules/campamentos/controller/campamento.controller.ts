@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { CreateCampamentoDto } from '../dto/create-campamento.dto';
 import { UpdateCampamentoDto } from '../dto/update-campamento.dto';
 import { Campamento } from '../entity/campamento.entity';
